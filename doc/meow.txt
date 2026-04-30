@@ -278,7 +278,7 @@ All colors are hex strings. Override any of these via the `colors` option.
 
   cursor               #B6BBC4       Cursor block color
   cursor_line          #0a1030       Current-line highlight background
-  selection            #B6BBC420     Visual selection background
+  selection            #191B26       Visual selection background
   line_nr              #45474B       Inactive line number foreground
   line_nr_active       #ff6188       Active line number foreground
 
@@ -316,11 +316,11 @@ All colors are hex strings. Override any of these via the `colors` option.
   diff_modify          #3a2e1e       Diff modified line background
   diff_remove          #3a1e2e       Diff removed line background
 
-  search_match         #4e534d94     Search result background
-  search_current       #53575350     Current search result background
+  search_match         #2F3233       Search result background
+  search_current       #1C1E24       Current search result background
 
   bracket_match_bg     #2B2C28       Matching bracket background
-  whitespace           #45474B50     Whitespace / indent guide color
+  whitespace           #181922       Whitespace / indent guide color
   cursor_ime           #ff6188       IME cursor color
 
 ==============================================================================

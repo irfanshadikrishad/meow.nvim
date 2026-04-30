@@ -51,7 +51,7 @@ local defaults = {
   -- UI elements
   cursor             = "#B6BBC4",
   cursor_line        = "#0a1030",
-  selection          = "#B6BBC420",
+  selection          = "#191B26",
   line_nr            = "#45474B",
   line_nr_active     = "#ff6188",
 
@@ -96,12 +96,12 @@ local defaults = {
   diff_remove        = "#3a1e2e",
 
   -- Search
-  search_match       = "#4e534d94",
-  search_current     = "#53575350",
+  search_match       = "#2F3233",
+  search_current     = "#1C1E24",
 
   -- Misc
   bracket_match_bg   = "#2B2C28",
-  whitespace         = "#45474B50",
+  whitespace         = "#181922",
   cursor_ime         = "#ff6188",
 }
 

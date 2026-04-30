@@ -7,12 +7,12 @@ end
 function M.setup(colors, config)
 	-- Functions
 	hl("@function", { fg = colors.function_name })
-	hl("@function.builtin", { fg = colors.function_call })
-	hl("@function.call", { fg = colors.function_call })
+	hl("@function.builtin", { fg = colors.function_name })
+	hl("@function.call", { fg = colors.function_name })
 	hl("@function.macro", { fg = colors.keyword })
 	hl("@function.method", { fg = colors.function_name })
-	hl("@function.method.call", { fg = colors.function_call })
-	hl("@constructor", { fg = colors.type })
+	hl("@function.method.call", { fg = colors.function_name })
+	hl("@constructor", { fg = colors.function_name })
 
 	-- Keywords
 	local keyword_style = { fg = colors.keyword }
@@ -32,11 +32,11 @@ function M.setup(colors, config)
 	hl("@type", { fg = colors.type })
 	hl("@type.builtin", { fg = colors.type })
 	hl("@type.qualifier", { fg = colors.keyword })
-	hl("@type.definition", { fg = colors.type })
+	hl("@type.definition", { fg = colors.function_name })
 
 	-- Variables
-	hl("@variable", { fg = colors.fg })
-	hl("@variable.builtin", { fg = colors.constant })
+	hl("@variable", { fg = colors.type })
+	hl("@variable.builtin", { fg = colors.type })
 	hl("@variable.parameter", { fg = colors.variable })
 	hl("@variable.member", { fg = colors.property })
 
@@ -71,10 +71,10 @@ function M.setup(colors, config)
 	hl("@punctuation.special", { fg = colors.keyword })
 
 	-- Other
-	hl("@property", { fg = colors.property })
+	hl("@property", { fg = colors.function_call })
 	hl("@label", { fg = colors.keyword })
 	hl("@tag", { fg = colors.keyword })
-	hl("@tag.attribute", { fg = colors.property })
+	hl("@tag.attribute", { fg = colors.function_name })
 	hl("@tag.delimiter", { fg = colors.operator })
 	hl("@module", { fg = colors.type })
 	hl("@preproc", { fg = colors.keyword })

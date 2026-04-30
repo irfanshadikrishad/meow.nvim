@@ -10,10 +10,17 @@ local builtin = {
   which_key       = "meow.integrations.which_key",
   cmp             = "meow.integrations.cmp",
   lualine         = "meow.integrations.lualine",
-  neo_tree        = "meow.integrations.neo_tree",
+  neo_tree         = "meow.integrations.neo_tree",
+  nvim_tree        = "meow.integrations.nvim_tree",
   indent_blankline = "meow.integrations.indent_blankline",
-  notify          = "meow.integrations.notify",
-  dashboard       = "meow.integrations.dashboard",
+  notify           = "meow.integrations.notify",
+  dashboard        = "meow.integrations.dashboard",
+  nvchad              = "meow.integrations.nvchad",
+  snacks              = "meow.integrations.snacks",
+  noice               = "meow.integrations.noice",
+  illuminate          = "meow.integrations.illuminate",
+  treesitter_context  = "meow.integrations.treesitter_context",
+  rainbow_delimiters  = "meow.integrations.rainbow_delimiters",
 }
 
 ---Custom integrations registered at runtime via `meow.extend()`.

@@ -65,7 +65,7 @@ function M.apply(colors, config)
 	hl("PreCondit", keyword_style)
 
 	hl("Function", { fg = colors.function_name })
-	hl("Identifier", { fg = colors.function_call })
+	hl("Identifier", { fg = colors.type })
 
 	hl("String", { fg = colors.string })
 	hl("Character", { fg = colors.string })
@@ -101,15 +101,23 @@ function M.apply(colors, config)
 	-- UI COMPONENTS
 	-- ==========================================================================
 	-- Popup menus
-	hl("Pmenu", { bg = colors.popup_bg, fg = colors.fg })
-	hl("PmenuSel", { bg = colors.popup_highlight, fg = colors.popup_highlight_fg })
-	hl("PmenuSbar", { bg = colors.cursor_line })
-	hl("PmenuThumb", { bg = colors.popup_highlight })
+	hl("Pmenu",         { bg = colors.popup_bg,        fg = colors.fg })
+	hl("PmenuSel",      { bg = colors.popup_highlight, fg = colors.popup_highlight_fg })
+	hl("PmenuSbar",     { bg = colors.cursor_line })
+	hl("PmenuThumb",    { bg = colors.popup_highlight })
+	-- Extended pmenu (Neovim 0.9+)
+	hl("PmenuKind",     { bg = colors.popup_bg,        fg = colors.type })
+	hl("PmenuKindSel",  { bg = colors.popup_highlight, fg = colors.type })
+	hl("PmenuExtra",    { bg = colors.popup_bg,        fg = colors.comment })
+	hl("PmenuExtraSel", { bg = colors.popup_highlight, fg = colors.comment })
 
 	-- Floating windows
-	hl("FloatBorder", { fg = colors.popup_border, bg = colors.popup_bg })
-	hl("FloatTitle", { fg = colors.keyword })
-	hl("NormalFloat", { bg = colors.popup_bg })
+	hl("FloatBorder",         { fg = colors.popup_border, bg = colors.popup_bg })
+	hl("FloatTitle",          { fg = colors.keyword, bold = true })
+	hl("FloatFooter",         { fg = colors.comment, bg = colors.popup_bg })
+	hl("NormalFloat",         { fg = colors.fg,      bg = colors.popup_bg })
+	hl("FloatShadow",         { bg = colors.bg, blend = 50 })
+	hl("FloatShadowThrough",  { bg = colors.bg, blend = 100 })
 
 	-- Statusline
 	hl("StatusLine", { fg = colors.fg, bg = colors.bg })
@@ -122,8 +130,9 @@ function M.apply(colors, config)
 	hl("TabLineSel", { fg = colors.fg, bg = colors.popup_bg })
 	hl("TabLineFill", { bg = colors.bg })
 
-	-- Split
-	hl("VertSplit", { fg = colors.popup_border, bg = colors.bg })
+	-- Splits & separators
+	hl("VertSplit",    { fg = colors.popup_border, bg = colors.bg })
+	hl("WinSeparator", { fg = colors.popup_border, bg = colors.bg })
 
 	-- Fold
 	hl("Folded", { fg = colors.comment, bg = colors.cursor_line })
@@ -150,9 +159,27 @@ function M.apply(colors, config)
 	-- Terminal
 	hl("Terminal", { fg = colors.fg, bg = colors.bg })
 
+	-- LSP inlay hints
+	hl("LspInlayHint",      { fg = colors.comment, bg = colors.cursor_line, italic = true })
+
+	-- LSP codelens
+	hl("LspCodeLens",       { fg = colors.comment, italic = true })
+	hl("LspCodeLensSeparator", { fg = colors.line_nr })
+
+	-- Additional diagnostics (Neovim 0.10+)
+	hl("DiagnosticDeprecated",  { strikethrough = true, sp = colors.error })
+	hl("DiagnosticUnnecessary", { fg = colors.comment })
+
 	-- Debug
 	hl("debugBreakpoint", { fg = colors.error })
 	hl("debugPC", { bg = colors.selection })
+
+	-- Window bar (breadcrumbs / winbar plugins)
+	hl("WinBar",   { fg = colors.fg,      bg = colors.bg })
+	hl("WinBarNC", { fg = colors.line_nr, bg = colors.bg })
+
+	-- Sidebar / panel normal (used by nvim-tree, aerial, etc.)
+	hl("NormalSB", { fg = colors.fg, bg = colors.bg })
 
 	-- ==========================================================================
 	-- MESSAGES & PROMPTS
@@ -162,6 +189,27 @@ function M.apply(colors, config)
 	hl("Question", { fg = colors.info })
 	hl("MsgArea", { fg = colors.fg })
 	hl("MsgSeparator", { fg = colors.line_nr })
+
+	-- ==========================================================================
+	-- TERMINAL COLORS
+	-- Sets the 16-color palette used by :terminal buffers.
+	-- ==========================================================================
+	vim.g.terminal_color_0  = colors.bg             -- black
+	vim.g.terminal_color_1  = colors.error          -- red
+	vim.g.terminal_color_2  = colors.git_add        -- green
+	vim.g.terminal_color_3  = colors.constant       -- yellow
+	vim.g.terminal_color_4  = colors.function_name  -- blue
+	vim.g.terminal_color_5  = colors.keyword        -- magenta
+	vim.g.terminal_color_6  = colors.type           -- cyan
+	vim.g.terminal_color_7  = colors.fg             -- white
+	vim.g.terminal_color_8  = colors.comment        -- bright black
+	vim.g.terminal_color_9  = colors.error          -- bright red
+	vim.g.terminal_color_10 = colors.string         -- bright green
+	vim.g.terminal_color_11 = colors.warning        -- bright yellow
+	vim.g.terminal_color_12 = colors.function_name  -- bright blue
+	vim.g.terminal_color_13 = colors.property       -- bright magenta
+	vim.g.terminal_color_14 = colors.info           -- bright cyan
+	vim.g.terminal_color_15 = colors.fg             -- bright white
 end
 
 return M

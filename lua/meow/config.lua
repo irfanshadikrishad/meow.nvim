@@ -9,9 +9,16 @@ local M = {}
 ---@field cmp? boolean
 ---@field lualine? boolean
 ---@field neo_tree? boolean
+---@field nvim_tree? boolean
 ---@field indent_blankline? boolean
 ---@field notify? boolean
 ---@field dashboard? boolean
+---@field nvchad? boolean
+---@field snacks? boolean
+---@field noice? boolean
+---@field illuminate? boolean
+---@field treesitter_context? boolean
+---@field rainbow_delimiters? boolean
 
 ---@class MeowConfig
 ---@field colors? table<string, string>    Hex color overrides — any key from MeowPalette
@@ -34,10 +41,17 @@ M.defaults = {
     which_key = true,
     cmp = true,
     lualine = true,
-    neo_tree = true,
+    neo_tree         = true,
+    nvim_tree        = true,
     indent_blankline = true,
-    notify = true,
-    dashboard = true,
+    notify           = true,
+    dashboard        = true,
+    nvchad             = true,
+    snacks             = true,
+    noice              = true,
+    illuminate         = true,
+    treesitter_context = true,
+    rainbow_delimiters = true,
   },
 }
 

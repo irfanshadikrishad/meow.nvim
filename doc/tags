@@ -1,0 +1,15 @@
+meow-api	meow.txt	/*meow-api*
+meow-color-overrides	meow.txt	/*meow-color-overrides*
+meow-configuration	meow.txt	/*meow-configuration*
+meow-contents	meow.txt	/*meow-contents*
+meow-custom-integrations	meow.txt	/*meow-custom-integrations*
+meow-installation	meow.txt	/*meow-installation*
+meow-integrations	meow.txt	/*meow-integrations*
+meow-introduction	meow.txt	/*meow-introduction*
+meow-palette	meow.txt	/*meow-palette*
+meow-quickstart	meow.txt	/*meow-quickstart*
+meow-requirements	meow.txt	/*meow-requirements*
+meow.extend()	meow.txt	/*meow.extend()*
+meow.get_colors()	meow.txt	/*meow.get_colors()*
+meow.nvim	meow.txt	/*meow.nvim*
+meow.setup()	meow.txt	/*meow.setup()*

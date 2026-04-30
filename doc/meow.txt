@@ -1,0 +1,327 @@
+*meow.nvim*  A dark, vibrant colorscheme for Neovim
+
+Author:   Irfan Shadik Rishad
+License:  MIT
+Homepage: https://github.com/irfanshadikrishad/meow.nvim
+
+==============================================================================
+CONTENTS                                                       *meow-contents*
+
+  1. Introduction ...................... |meow-introduction|
+  2. Requirements ...................... |meow-requirements|
+  3. Installation ...................... |meow-installation|
+  4. Quick Start ....................... |meow-quickstart|
+  5. Configuration ..................... |meow-configuration|
+  6. API ............................... |meow-api|
+  7. Integrations ...................... |meow-integrations|
+  8. Custom Integrations ............... |meow-custom-integrations|
+  9. Palette Reference ................. |meow-palette|
+
+==============================================================================
+1. INTRODUCTION                                            *meow-introduction*
+
+Meow is a dark, vibrant colorscheme for Neovim inspired by the VSCode Meow
+theme. It ships with first-class support for Treesitter, LSP semantic tokens,
+and a growing set of popular plugins.
+
+==============================================================================
+2. REQUIREMENTS                                            *meow-requirements*
+
+  • Neovim >= 0.9.0
+  • `termguicolors` enabled (`:set termguicolors`)
+  • Optional: nvim-treesitter, for richer syntax highlighting
+
+==============================================================================
+3. INSTALLATION                                            *meow-installation*
+
+lazy.nvim ~
+>lua
+  {
+    "irfanshadikrishad/meow.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("meow").setup()
+      vim.cmd.colorscheme("meow")
+    end,
+  }
+<
+
+vim-plug ~
+>vim
+  Plug 'irfanshadikrishad/meow.nvim'
+<
+Then in your init.lua / init.vim:
+>lua
+  require("meow").setup()
+  vim.cmd.colorscheme("meow")
+<
+
+==============================================================================
+4. QUICK START                                              *meow-quickstart*
+
+Minimal setup — all options are optional:
+>lua
+  require("meow").setup()
+  vim.cmd.colorscheme("meow")
+<
+
+With options:
+>lua
+  require("meow").setup({
+    transparent      = true,
+    italic_comments  = true,
+    bold_keywords    = false,
+    colors = {
+      bg      = "#000000",
+      keyword = "#ff79c6",
+    },
+    integrations = {
+      telescope = true,
+      lualine   = true,
+      cmp       = true,
+    },
+  })
+  vim.cmd.colorscheme("meow")
+<
+
+==============================================================================
+5. CONFIGURATION                                          *meow-configuration*
+
+Pass a table to |meow.setup()|. All keys are optional; unset keys fall back to
+their defaults shown below.
+
+>lua
+  require("meow").setup({
+    -- Hex color overrides. Any key from |meow-palette| is valid.
+    colors = {},
+
+    -- Use a transparent background for Normal and floating windows.
+    transparent = false,
+
+    -- Render comments in italic.
+    italic_comments = true,
+
+    -- Render keywords in bold.
+    bold_keywords = false,
+
+    -- Per-integration opt-out. Set a key to false to disable that integration.
+    integrations = {
+      treesitter       = true,
+      lsp              = true,
+      gitsigns         = true,
+      telescope        = true,
+      which_key        = true,
+      cmp              = true,
+      lualine          = true,
+      neo_tree         = true,
+      indent_blankline = true,
+      notify           = true,
+      dashboard        = true,
+    },
+  })
+<
+
+------------------------------------------------------------------------------
+COLOR OVERRIDES                                       *meow-color-overrides*
+
+The `colors` table accepts any key listed in |meow-palette|. Values must be
+hex strings. Overrides are applied on top of the defaults before highlights
+are set, so every highlight group that references the key is updated
+automatically.
+
+Example — change the background and accent:
+>lua
+  require("meow").setup({
+    colors = {
+      bg      = "#0d0d0d",
+      keyword = "#c678dd",
+    },
+  })
+<
+
+==============================================================================
+6. API                                                            *meow-api*
+
+------------------------------------------------------------------------------
+                                                               *meow.setup()*
+meow.setup([opts])
+
+  Apply the colorscheme. Call this before `vim.cmd.colorscheme("meow")`.
+
+  Parameters:
+    {opts}  (optional) |MeowConfig| table — see |meow-configuration|.
+
+------------------------------------------------------------------------------
+                                                          *meow.get_colors()*
+meow.get_colors()
+
+  Return the currently active |MeowPalette| table.
+
+  If called before |meow.setup()|, returns the palette resolved with default
+  options so it is always safe to call.
+
+  This is the recommended way to build a lualine theme or any custom highlight
+  group that should inherit meow's palette:
+>lua
+  local c = require("meow").get_colors()
+  vim.api.nvim_set_hl(0, "MyStatusline", { fg = c.fg, bg = c.bg })
+<
+
+------------------------------------------------------------------------------
+                                                            *meow.extend()*
+meow.extend(name, mod)
+
+  Register a custom integration that runs on every |meow.setup()| call.
+
+  Parameters:
+    {name}  (string) Unique identifier. This key also appears in the
+            `integrations` config table so users can disable it with
+            `integrations = { [name] = false }`.
+    {mod}   (table) Must contain a `setup(colors, config)` function.
+
+  Example:
+>lua
+  require("meow").extend("my_statusline", {
+    setup = function(colors, config)
+      vim.api.nvim_set_hl(0, "MyStatuslineAccent", {
+        fg = colors.bg,
+        bg = colors.keyword,
+        bold = true,
+      })
+    end,
+  })
+<
+
+  Call `extend()` before the first `setup()` call (e.g. in the same `config`
+  function) so the integration is included from the start.
+
+==============================================================================
+7. INTEGRATIONS                                          *meow-integrations*
+
+Integrations apply highlight groups for third-party plugins. They are all
+enabled by default and can be disabled individually.
+
+  Integration key      Plugin
+  ─────────────────    ────────────────────────────────────────────────────
+  treesitter           nvim-treesitter (Treesitter capture groups)
+  lsp                  Neovim built-in LSP + semantic tokens
+  gitsigns             lewis6991/gitsigns.nvim
+  telescope            nvim-telescope/telescope.nvim
+  which_key            folke/which-key.nvim
+  cmp                  hrsh7th/nvim-cmp
+  lualine              nvim-lualine/lualine.nvim
+  neo_tree             nvim-neo-tree/neo-tree.nvim
+  indent_blankline     lukas-reineke/indent-blankline.nvim (v2 + v3)
+  notify               rcarriga/nvim-notify
+  dashboard            nvimdev/dashboard-nvim · goolord/alpha-nvim
+
+Disable an integration:
+>lua
+  require("meow").setup({
+    integrations = {
+      dashboard = false,
+    },
+  })
+<
+
+Lualine theme ~
+
+The lualine integration exposes a `theme()` helper in addition to applying
+highlight groups:
+>lua
+  require("lualine").setup({
+    options = {
+      theme = require("meow.integrations.lualine").theme(),
+    },
+  })
+<
+
+==============================================================================
+8. CUSTOM INTEGRATIONS                           *meow-custom-integrations*
+
+Any plugin can register its own integration module so users get consistent
+theming without writing boilerplate:
+
+>lua
+  -- In your plugin's setup / config:
+  require("meow").extend("myplugin", {
+    setup = function(colors, config)
+      vim.api.nvim_set_hl(0, "MyPluginBorder", {
+        fg = colors.popup_border,
+        bg = colors.popup_bg,
+      })
+      vim.api.nvim_set_hl(0, "MyPluginTitle", {
+        fg = colors.keyword,
+        bold = true,
+      })
+    end,
+  })
+<
+
+Users can then disable it the same way as a built-in:
+>lua
+  require("meow").setup({
+    integrations = { myplugin = false },
+  })
+<
+
+==============================================================================
+9. PALETTE REFERENCE                                          *meow-palette*
+
+All colors are hex strings. Override any of these via the `colors` option.
+
+  Key                  Default       Purpose
+  ───────────────────  ────────────  ────────────────────────────────────────
+  bg                   #03040f       Editor background
+  fg                   #B6BBC4       Default foreground text
+
+  cursor               #B6BBC4       Cursor block color
+  cursor_line          #0a1030       Current-line highlight background
+  selection            #B6BBC420     Visual selection background
+  line_nr              #45474B       Inactive line number foreground
+  line_nr_active       #ff6188       Active line number foreground
+
+  popup_bg             #03040f       Floating window / Pmenu background
+  popup_border         #1b1b1b       Floating window border
+  popup_highlight      #ff6188       Selected item accent
+  popup_highlight_bg   #ff6188       Selected item background
+  popup_highlight_fg   #03040f       Selected item foreground
+
+  comment              #454545       Comment text
+  keyword              #ff6188       Keywords, control flow
+  function_name        #3dc2ec       Function definitions
+  function_call        #E76F51       Function call sites
+  string               #98c379       String literals
+  number               #B99470       Number literals
+  type                 #6DA4AA       Type names
+  constant             #ECB365       Constants
+  operator             #353535       Operators and delimiters
+  variable             #E29578       Variable names
+  property             #858AE3       Properties and fields
+
+  boolean              #B99470       Boolean literals
+  null                 #858AE3       Null / nil literals
+
+  error                #FE5D9F       Error diagnostic color
+  warning              #FF9130       Warning diagnostic color
+  info                 #4CC9F0       Info diagnostic color
+  hint                 #84A98C       Hint diagnostic color
+
+  git_add              #98c379       Git added sign
+  git_change           #ECB365       Git changed sign
+  git_delete           #ff6188       Git deleted sign
+
+  diff_add             #1e3a2e       Diff added line background
+  diff_modify          #3a2e1e       Diff modified line background
+  diff_remove          #3a1e2e       Diff removed line background
+
+  search_match         #4e534d94     Search result background
+  search_current       #53575350     Current search result background
+
+  bracket_match_bg     #2B2C28       Matching bracket background
+  whitespace           #45474B50     Whitespace / indent guide color
+  cursor_ime           #ff6188       IME cursor color
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:

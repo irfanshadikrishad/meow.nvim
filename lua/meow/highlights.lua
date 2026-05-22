@@ -25,10 +25,9 @@ function M.apply(colors, config)
 	-- Selection
 	hl("Visual", { bg = colors.selection })
 	hl("VisualNOS", { bg = colors.selection })
-	hl("Selection", { bg = colors.selection })
 
 	-- Search
-	hl("Search", { bg = colors.search_match })
+	hl("Search", { bg = colors.search_match, fg = colors.fg })
 	hl("IncSearch", { bg = colors.search_current, fg = colors.fg })
 	hl("CurSearch", { bg = colors.popup_highlight, fg = colors.bg })
 	hl("Substitute", { bg = colors.error, fg = colors.bg })
@@ -65,7 +64,7 @@ function M.apply(colors, config)
 	hl("PreCondit", keyword_style)
 
 	hl("Function", { fg = colors.function_name })
-	hl("Identifier", { fg = colors.type })
+	hl("Identifier", { fg = colors.variable })
 
 	hl("String", { fg = colors.string })
 	hl("Character", { fg = colors.string })
@@ -107,9 +106,9 @@ function M.apply(colors, config)
 	hl("PmenuThumb",    { bg = colors.popup_highlight })
 	-- Extended pmenu (Neovim 0.9+)
 	hl("PmenuKind",     { bg = colors.popup_bg,        fg = colors.type })
-	hl("PmenuKindSel",  { bg = colors.popup_highlight, fg = colors.type })
+	hl("PmenuKindSel",  { bg = colors.popup_highlight, fg = colors.popup_highlight_fg })
 	hl("PmenuExtra",    { bg = colors.popup_bg,        fg = colors.comment })
-	hl("PmenuExtraSel", { bg = colors.popup_highlight, fg = colors.comment })
+	hl("PmenuExtraSel", { bg = colors.popup_highlight, fg = colors.popup_highlight_fg })
 
 	-- Floating windows
 	hl("FloatBorder",         { fg = colors.popup_border, bg = colors.popup_bg })
@@ -127,7 +126,7 @@ function M.apply(colors, config)
 
 	-- Tab line
 	hl("TabLine", { fg = colors.line_nr, bg = colors.bg })
-	hl("TabLineSel", { fg = colors.fg, bg = colors.popup_bg })
+	hl("TabLineSel", { fg = colors.fg, bg = colors.cursor_line })
 	hl("TabLineFill", { bg = colors.bg })
 
 	-- Splits & separators
@@ -159,6 +158,13 @@ function M.apply(colors, config)
 	-- Terminal
 	hl("Terminal", { fg = colors.fg, bg = colors.bg })
 
+	-- Diagnostic sign column
+	hl("DiagnosticSignError", { fg = colors.error,   bg = colors.bg })
+	hl("DiagnosticSignWarn",  { fg = colors.warning, bg = colors.bg })
+	hl("DiagnosticSignInfo",  { fg = colors.info,    bg = colors.bg })
+	hl("DiagnosticSignHint",  { fg = colors.hint,    bg = colors.bg })
+	hl("DiagnosticSignOk",    { fg = colors.git_add, bg = colors.bg })
+
 	-- LSP inlay hints
 	hl("LspInlayHint",      { fg = colors.comment, bg = colors.cursor_line, italic = true })
 
@@ -179,7 +185,7 @@ function M.apply(colors, config)
 	hl("WinBarNC", { fg = colors.line_nr, bg = colors.bg })
 
 	-- Sidebar / panel normal (used by nvim-tree, aerial, etc.)
-	hl("NormalSB", { fg = colors.fg, bg = colors.bg })
+	hl("NormalSB", { fg = colors.fg, bg = colors.sidebar_bg })
 
 	-- ==========================================================================
 	-- MESSAGES & PROMPTS

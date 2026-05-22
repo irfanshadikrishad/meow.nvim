@@ -16,20 +16,21 @@ CONTENTS                                                       *meow-contents*
   7. Integrations ...................... |meow-integrations|
   8. Custom Integrations ............... |meow-custom-integrations|
   9. Palette Reference ................. |meow-palette|
+ 10. NvChad Compatibility .............. |meow-nvchad|
 
 ==============================================================================
 1. INTRODUCTION                                            *meow-introduction*
 
-Meow is a dark, vibrant colorscheme for Neovim inspired by the VSCode Meow
-theme. It ships with first-class support for Treesitter, LSP semantic tokens,
-and a growing set of popular plugins.
+Meow is a dark, vibrant colorscheme for Neovim with a pink accent palette.
+It ships with first-class support for Treesitter, LSP semantic tokens,
+NvChad/base46, and a growing set of popular plugins.
 
 ==============================================================================
 2. REQUIREMENTS                                            *meow-requirements*
 
   • Neovim >= 0.9.0
   • `termguicolors` enabled (`:set termguicolors`)
-  • Optional: nvim-treesitter, for richer syntax highlighting
+  • Optional: nvim-treesitter for richer syntax highlighting
 
 ==============================================================================
 3. INSTALLATION                                            *meow-installation*
@@ -69,9 +70,9 @@ Minimal setup — all options are optional:
 With options:
 >lua
   require("meow").setup({
-    transparent      = true,
-    italic_comments  = true,
-    bold_keywords    = false,
+    transparent     = true,
+    italic_comments = true,
+    bold_keywords   = false,
     colors = {
       bg      = "#000000",
       keyword = "#ff79c6",
@@ -107,17 +108,27 @@ their defaults shown below.
 
     -- Per-integration opt-out. Set a key to false to disable that integration.
     integrations = {
-      treesitter       = true,
-      lsp              = true,
-      gitsigns         = true,
-      telescope        = true,
-      which_key        = true,
-      cmp              = true,
-      lualine          = true,
-      neo_tree         = true,
-      indent_blankline = true,
-      notify           = true,
-      dashboard        = true,
+      treesitter         = true,
+      lsp                = true,
+      gitsigns           = true,
+      telescope          = true,
+      fzf_lua            = true,
+      which_key          = true,
+      cmp                = true,
+      blink_cmp          = true,
+      lualine            = true,
+      neo_tree           = true,
+      nvim_tree          = true,
+      indent_blankline   = true,
+      notify             = true,
+      dashboard          = true,
+      nvchad             = true,
+      snacks             = true,
+      noice              = true,
+      illuminate         = true,
+      treesitter_context = true,
+      rainbow_delimiters = true,
+      floaterm           = true,
     },
   })
 <
@@ -148,9 +159,21 @@ Example — change the background and accent:
 meow.setup([opts])
 
   Apply the colorscheme. Call this before `vim.cmd.colorscheme("meow")`.
+  Calling `setup()` multiple times is safe — each call replaces the stored
+  config and re-applies all highlights.
 
   Parameters:
     {opts}  (optional) |MeowConfig| table — see |meow-configuration|.
+
+------------------------------------------------------------------------------
+                                                           *meow.reload()*
+meow.reload()
+
+  Re-apply the colorscheme using the config most recently passed to
+  |meow.setup()|. This is what `colors/meow.lua` calls so that
+  `:colorscheme meow` always preserves your setup options.
+
+  You generally do not need to call this directly.
 
 ------------------------------------------------------------------------------
                                                           *meow.get_colors()*
@@ -162,7 +185,7 @@ meow.get_colors()
   options so it is always safe to call.
 
   This is the recommended way to build a lualine theme or any custom highlight
-  group that should inherit meow's palette:
+  group that should stay consistent with the active meow palette:
 >lua
   local c = require("meow").get_colors()
   vim.api.nvim_set_hl(0, "MyStatusline", { fg = c.fg, bg = c.bg })
@@ -208,13 +231,23 @@ enabled by default and can be disabled individually.
   lsp                  Neovim built-in LSP + semantic tokens
   gitsigns             lewis6991/gitsigns.nvim
   telescope            nvim-telescope/telescope.nvim
+  fzf_lua              ibhagwan/fzf-lua
   which_key            folke/which-key.nvim
   cmp                  hrsh7th/nvim-cmp
+  blink_cmp            Saghen/blink.cmp
   lualine              nvim-lualine/lualine.nvim
   neo_tree             nvim-neo-tree/neo-tree.nvim
+  nvim_tree            nvim-tree/nvim-tree.lua
   indent_blankline     lukas-reineke/indent-blankline.nvim (v2 + v3)
   notify               rcarriga/nvim-notify
   dashboard            nvimdev/dashboard-nvim · goolord/alpha-nvim
+  nvchad               NvChad/NvChad (statusline, tabufline, nvdash)
+  snacks               folke/snacks.nvim (dashboard, picker, indent, notifier)
+  noice                folke/noice.nvim
+  illuminate           RRethy/vim-illuminate
+  treesitter_context   nvim-treesitter/nvim-treesitter-context
+  rainbow_delimiters   HiPhish/rainbow-delimiters.nvim
+  floaterm             NvChad/floaterm + volt (ex* groups, FloatSpecialBorder)
 
 Disable an integration:
 >lua
@@ -277,18 +310,18 @@ All colors are hex strings. Override any of these via the `colors` option.
   fg                   #B6BBC4       Default foreground text
 
   cursor               #B6BBC4       Cursor block color
-  cursor_line          #0a1030       Current-line highlight background
+  cursor_line          #0D1321       Current-line highlight background
   selection            #191B26       Visual selection background
-  line_nr              #45474B       Inactive line number foreground
+  line_nr              #5A5C62       Inactive line number foreground
   line_nr_active       #ff6188       Active line number foreground
 
   popup_bg             #03040f       Floating window / Pmenu background
-  popup_border         #1b1b1b       Floating window border
-  popup_highlight      #ff6188       Selected item accent
+  popup_border         #2a2b3d       Floating window border color
+  popup_highlight      #ff6188       Selected item accent (Pmenu, picker)
   popup_highlight_bg   #ff6188       Selected item background
   popup_highlight_fg   #03040f       Selected item foreground
 
-  comment              #454545       Comment text
+  comment              #6B7080       Comment text
   keyword              #ff6188       Keywords, control flow
   function_name        #3dc2ec       Function definitions
   function_call        #E76F51       Function call sites
@@ -296,12 +329,12 @@ All colors are hex strings. Override any of these via the `colors` option.
   number               #B99470       Number literals
   type                 #6DA4AA       Type names
   constant             #ECB365       Constants
-  operator             #353535       Operators and delimiters
+  operator             #7E8299       Operators and delimiters
   variable             #E29578       Variable names
   property             #858AE3       Properties and fields
 
-  boolean              #B99470       Boolean literals
-  null                 #858AE3       Null / nil literals
+  boolean              #D4956A       Boolean literals
+  null                 #A89EC9       Null / nil literals
 
   error                #FE5D9F       Error diagnostic color
   warning              #FF9130       Warning diagnostic color
@@ -316,12 +349,45 @@ All colors are hex strings. Override any of these via the `colors` option.
   diff_modify          #3a2e1e       Diff modified line background
   diff_remove          #3a1e2e       Diff removed line background
 
-  search_match         #2F3233       Search result background
-  search_current       #1C1E24       Current search result background
+  search_match         #1e3d5c       Search result background
+  search_current       #3d1e5c       Current search result background
 
   bracket_match_bg     #2B2C28       Matching bracket background
-  whitespace           #181922       Whitespace / indent guide color
+  whitespace           #252636       Whitespace / indent guide color
   cursor_ime           #ff6188       IME cursor color
+  sidebar_bg           #060914       Sidebar / file-tree panel background
+
+==============================================================================
+10. NVCHAD COMPATIBILITY                                      *meow-nvchad*
+
+Meow ships a `lua/themes/meow.lua` base46 theme definition so that NvChad's
+base46 system can load it natively when `base46.theme = "meow"` is set in
+your `chadrc.lua`:
+>lua
+  M.base46 = { theme = "meow" }
+<
+
+NvChad compat notes ~
+
+• base46 compiles its own highlight cache and applies it in two passes: once
+  at startup via `load_all_highlights()`, and again lazily when each
+  integration plugin first opens (telescope, nvim-tree, tabufline, etc.).
+  Meow's `colors/meow.lua` uses a double `vim.schedule` to land after base46's
+  startup pass, and each integration that is affected by lazy loading registers
+  a `FileType` or `BufAdd` autocmd to reapply its groups at the right moment.
+
+• The `nvchad` integration covers: NvChad statusline (`St_*` groups for all
+  modes, minimal + default + vscode styles), tabufline (`Tb*`), and nvdash
+  (`NvDash*`). It does NOT require you to disable NvChad's own highlights —
+  meow's autocmds win the race after base46's lazy cache loads.
+
+• Telescope titles — NvChad's base46 defaults to a hot-pink `PromptTitle` and
+  lime-green `PreviewTitle`. Meow overrides these with palette-consistent
+  colors (keyword pink, function_name teal) via a `FileType TelescopePrompt`
+  autocmd so base46's lazy cache never wins.
+
+• If you use the `minimal` statusline style with `block` separators, all
+  `St_<mode>_sep / _bg / _txt` groups are defined and tested.
 
 ==============================================================================
 vim:tw=78:ts=8:ft=help:norl:

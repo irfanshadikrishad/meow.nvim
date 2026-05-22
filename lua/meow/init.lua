@@ -21,6 +21,13 @@ function M.setup(opts)
   vim.o.background  = "dark"
 end
 
+---Re-apply the colorscheme using the last config passed to setup().
+---Called from colors/meow.lua so that reloads preserve user config.
+---@return nil
+function M.reload()
+  M.setup(active_config)
+end
+
 ---Return the currently resolved color palette.
 ---Useful for building statusline themes or custom highlight groups that
 ---need to stay consistent with the active meow palette.

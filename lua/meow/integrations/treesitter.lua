@@ -8,10 +8,10 @@ function M.setup(colors, config)
 	-- Functions
 	hl("@function", { fg = colors.function_name })
 	hl("@function.builtin", { fg = colors.function_name })
-	hl("@function.call", { fg = colors.function_name })
+	hl("@function.call", { fg = colors.function_call })
 	hl("@function.macro", { fg = colors.keyword })
 	hl("@function.method", { fg = colors.function_name })
-	hl("@function.method.call", { fg = colors.function_name })
+	hl("@function.method.call", { fg = colors.function_call })
 	hl("@constructor", { fg = colors.function_name })
 
 	-- Keywords
@@ -27,16 +27,20 @@ function M.setup(colors, config)
 	hl("@keyword.operator", { fg = colors.operator })
 	hl("@keyword.import", keyword_style)
 	hl("@keyword.storage", keyword_style)
+	hl("@keyword.exception", keyword_style)
+	hl("@keyword.debug", { fg = colors.error })
+	hl("@keyword.directive", keyword_style)
+	hl("@keyword.conditional.ternary", { fg = colors.operator })
 
 	-- Types
 	hl("@type", { fg = colors.type })
 	hl("@type.builtin", { fg = colors.type })
 	hl("@type.qualifier", { fg = colors.keyword })
-	hl("@type.definition", { fg = colors.function_name })
+	hl("@type.definition", { fg = colors.type })
 
 	-- Variables
-	hl("@variable", { fg = colors.type })
-	hl("@variable.builtin", { fg = colors.type })
+	hl("@variable", { fg = colors.variable })
+	hl("@variable.builtin", { fg = colors.variable })
 	hl("@variable.parameter", { fg = colors.variable })
 	hl("@variable.member", { fg = colors.property })
 
@@ -71,7 +75,7 @@ function M.setup(colors, config)
 	hl("@punctuation.special", { fg = colors.keyword })
 
 	-- Other
-	hl("@property", { fg = colors.function_call })
+	hl("@property", { fg = colors.property })
 	hl("@label", { fg = colors.keyword })
 	hl("@tag", { fg = colors.keyword })
 	hl("@tag.attribute", { fg = colors.function_name })
@@ -79,7 +83,7 @@ function M.setup(colors, config)
 	hl("@module", { fg = colors.type })
 	hl("@preproc", { fg = colors.keyword })
 	hl("@debug", { fg = colors.error })
-	hl("@exception", { fg = colors.error })
+	hl("@exception", keyword_style)
 
 	-- Markdown specific
 	hl("@markup.heading", { fg = colors.keyword, bold = true })

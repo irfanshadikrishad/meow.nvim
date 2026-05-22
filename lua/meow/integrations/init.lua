@@ -8,8 +8,9 @@ local builtin = {
   gitsigns        = "meow.integrations.gitsigns",
   telescope       = "meow.integrations.telescope",
   which_key       = "meow.integrations.which_key",
-  cmp             = "meow.integrations.cmp",
-  lualine         = "meow.integrations.lualine",
+  cmp              = "meow.integrations.cmp",
+  blink_cmp        = "meow.integrations.blink_cmp",
+  lualine          = "meow.integrations.lualine",
   neo_tree         = "meow.integrations.neo_tree",
   nvim_tree        = "meow.integrations.nvim_tree",
   indent_blankline = "meow.integrations.indent_blankline",
@@ -21,6 +22,8 @@ local builtin = {
   illuminate          = "meow.integrations.illuminate",
   treesitter_context  = "meow.integrations.treesitter_context",
   rainbow_delimiters  = "meow.integrations.rainbow_delimiters",
+  fzf_lua             = "meow.integrations.fzf_lua",
+  floaterm            = "meow.integrations.floaterm",
 }
 
 ---Custom integrations registered at runtime via `meow.extend()`.

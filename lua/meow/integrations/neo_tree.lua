@@ -8,8 +8,8 @@ local function hl(group, attrs)
 end
 
 function M.setup(colors, _)
-  hl("NeoTreeNormal",          { fg = colors.fg, bg = colors.bg })
-  hl("NeoTreeNormalNC",        { fg = colors.fg, bg = colors.bg })
+  hl("NeoTreeNormal",          { fg = colors.fg, bg = colors.sidebar_bg })
+  hl("NeoTreeNormalNC",        { fg = colors.fg, bg = colors.sidebar_bg })
   hl("NeoTreeFloatBorder",     { fg = colors.popup_border, bg = colors.popup_bg })
   hl("NeoTreeFloatTitle",      { fg = colors.keyword, bold = true })
   hl("NeoTreeRootName",        { fg = colors.keyword, bold = true })

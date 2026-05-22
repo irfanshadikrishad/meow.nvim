@@ -10,7 +10,7 @@ A dark, vibrant colorscheme for Neovim with full Treesitter, LSP semantic token,
 
 ## Installation
 
-**[lazy.nvim](https://github.com/folke/lazy.nvim)**
+**[lazy.nvim](https://github.com/folke/lazy.nvim)** — standalone
 
 ```lua
 {
@@ -23,6 +23,22 @@ A dark, vibrant colorscheme for Neovim with full Treesitter, LSP semantic token,
   end,
 }
 ```
+
+**NvChad** — add the plugin, then set the theme in `chadrc.lua`
+
+```lua
+-- lua/plugins/meow.lua
+{ "irfanshadikrishad/meow.nvim", lazy = false }
+```
+
+```lua
+-- chadrc.lua
+M.base46 = {
+  theme = "meow",
+}
+```
+
+The plugin ships `lua/themes/meow.lua` in the base46 format. NvChad finds it automatically via the runtimepath — no manual file copying needed.
 
 **[vim-plug](https://github.com/junegunn/vim-plug)**
 
@@ -53,17 +69,26 @@ require("meow").setup({
 
   -- Disable individual integrations by setting them to false
   integrations = {
-    treesitter       = true,
-    lsp              = true,
-    gitsigns         = true,
-    telescope        = true,
-    which_key        = true,
-    cmp              = true,
-    lualine          = true,
-    neo_tree         = true,
-    indent_blankline = true,
-    notify           = true,
-    dashboard        = true,
+    treesitter         = true,
+    lsp                = true,
+    gitsigns           = true,
+    telescope          = true,
+    fzf_lua            = true,
+    which_key          = true,
+    cmp                = true,
+    blink_cmp          = true,
+    lualine            = true,
+    neo_tree           = true,
+    nvim_tree          = true,
+    indent_blankline   = true,
+    notify             = true,
+    dashboard          = true,
+    nvchad             = true,
+    snacks             = true,
+    noice              = true,
+    illuminate         = true,
+    treesitter_context = true,
+    rainbow_delimiters = true,
   },
 })
 ```
@@ -72,19 +97,28 @@ require("meow").setup({
 
 All integrations are enabled by default.
 
-| Key               | Plugin                                      |
-| ----------------- | ------------------------------------------- |
-| `treesitter`      | nvim-treesitter                             |
-| `lsp`             | Neovim built-in LSP + semantic tokens       |
-| `gitsigns`        | lewis6991/gitsigns.nvim                     |
-| `telescope`       | nvim-telescope/telescope.nvim               |
-| `which_key`       | folke/which-key.nvim                        |
-| `cmp`             | hrsh7th/nvim-cmp                            |
-| `lualine`         | nvim-lualine/lualine.nvim                   |
-| `neo_tree`        | nvim-neo-tree/neo-tree.nvim                 |
-| `indent_blankline`| lukas-reineke/indent-blankline.nvim         |
-| `notify`          | rcarriga/nvim-notify                        |
-| `dashboard`       | nvimdev/dashboard-nvim · goolord/alpha-nvim |
+| Key                  | Plugin                                          |
+| -------------------- | ----------------------------------------------- |
+| `treesitter`         | nvim-treesitter                                 |
+| `lsp`                | Neovim built-in LSP + semantic tokens           |
+| `gitsigns`           | lewis6991/gitsigns.nvim                         |
+| `telescope`          | nvim-telescope/telescope.nvim                   |
+| `fzf_lua`            | ibhagwan/fzf-lua                                |
+| `which_key`          | folke/which-key.nvim                            |
+| `cmp`                | hrsh7th/nvim-cmp                                |
+| `blink_cmp`          | Saghen/blink.cmp                                |
+| `lualine`            | nvim-lualine/lualine.nvim                       |
+| `neo_tree`           | nvim-neo-tree/neo-tree.nvim                     |
+| `nvim_tree`          | nvim-tree/nvim-tree.lua                         |
+| `indent_blankline`   | lukas-reineke/indent-blankline.nvim (v2 + v3)   |
+| `notify`             | rcarriga/nvim-notify                            |
+| `dashboard`          | nvimdev/dashboard-nvim · goolord/alpha-nvim     |
+| `nvchad`             | NvChad/NvChad (statusline, tabufline, nvdash)   |
+| `snacks`             | folke/snacks.nvim                               |
+| `noice`              | folke/noice.nvim                                |
+| `illuminate`         | RRethy/vim-illuminate                           |
+| `treesitter_context` | nvim-treesitter/nvim-treesitter-context         |
+| `rainbow_delimiters` | HiPhish/rainbow-delimiters.nvim                 |
 
 ### Lualine
 

@@ -6,10 +6,12 @@ meow-custom-integrations	meow.txt	/*meow-custom-integrations*
 meow-installation	meow.txt	/*meow-installation*
 meow-integrations	meow.txt	/*meow-integrations*
 meow-introduction	meow.txt	/*meow-introduction*
+meow-nvchad	meow.txt	/*meow-nvchad*
 meow-palette	meow.txt	/*meow-palette*
 meow-quickstart	meow.txt	/*meow-quickstart*
 meow-requirements	meow.txt	/*meow-requirements*
 meow.extend()	meow.txt	/*meow.extend()*
 meow.get_colors()	meow.txt	/*meow.get_colors()*
 meow.nvim	meow.txt	/*meow.nvim*
+meow.reload()	meow.txt	/*meow.reload()*
 meow.setup()	meow.txt	/*meow.setup()*

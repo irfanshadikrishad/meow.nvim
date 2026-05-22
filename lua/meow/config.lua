@@ -7,6 +7,7 @@ local M = {}
 ---@field telescope? boolean
 ---@field which_key? boolean
 ---@field cmp? boolean
+---@field blink_cmp? boolean
 ---@field lualine? boolean
 ---@field neo_tree? boolean
 ---@field nvim_tree? boolean
@@ -19,6 +20,7 @@ local M = {}
 ---@field illuminate? boolean
 ---@field treesitter_context? boolean
 ---@field rainbow_delimiters? boolean
+---@field fzf_lua? boolean
 
 ---@class MeowConfig
 ---@field colors? table<string, string>    Hex color overrides — any key from MeowPalette
@@ -39,8 +41,9 @@ M.defaults = {
     gitsigns = true,
     telescope = true,
     which_key = true,
-    cmp = true,
-    lualine = true,
+    cmp              = true,
+    blink_cmp        = true,
+    lualine          = true,
     neo_tree         = true,
     nvim_tree        = true,
     indent_blankline = true,
@@ -52,6 +55,7 @@ M.defaults = {
     illuminate         = true,
     treesitter_context = true,
     rainbow_delimiters = true,
+    fzf_lua            = true,
   },
 }
 

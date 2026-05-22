@@ -19,7 +19,7 @@ function M.setup(colors, _)
 	hl("DiffAdd", { bg = colors.diff_add })
 	hl("DiffChange", { bg = colors.diff_modify })
 	hl("DiffDelete", { bg = colors.diff_remove })
-	hl("DiffText", { bg = colors.popup_highlight_bg, fg = colors.bg })
+	hl("DiffText", { bg = colors.diff_modify, fg = colors.fg })
 
 	-- Git signs (legacy)
 	hl("SignAdd", { fg = colors.git_add })

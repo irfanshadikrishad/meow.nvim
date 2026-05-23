@@ -32,6 +32,12 @@ local function apply_deferred(colors)
 	hl("TelescopePreviewTitle",  { fg = colors.bg, bg = colors.function_name })
 	-- borderless: ResultsTitle invisible (same as panel bg)
 	hl("TelescopeResultsTitle",  { fg = colors.sidebar_bg, bg = colors.sidebar_bg })
+
+	-- Selection: base46 sets bg = #07091a (barely different from sidebar_bg).
+	-- Must be in apply_deferred so it wins after the lazy cache loads.
+	hl("TelescopeSelection",      { bg = colors.selection })
+	hl("TelescopeSelectionCaret", { fg = colors.keyword, bg = colors.selection })
+	hl("TelescopeMatching",       { fg = colors.popup_highlight, bold = true })
 end
 
 function M.setup(colors, _)
@@ -41,13 +47,6 @@ function M.setup(colors, _)
 
 	-- Groups that base46 lazy-loads — applied now and again via FileType
 	apply_deferred(colors)
-
-	-- Selection
-	hl("TelescopeSelection",      { bg = colors.selection })
-	hl("TelescopeSelectionCaret", { fg = colors.keyword })
-
-	-- Matching
-	hl("TelescopeMatching",       { fg = colors.popup_highlight })
 
 	-- Multi-selection
 	hl("TelescopeMultiSelection", { fg = colors.git_add })

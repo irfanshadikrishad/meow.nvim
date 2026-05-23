@@ -52,33 +52,33 @@ local defaults = {
   -- UI elements
   cursor = "#B6BBC4",
   cursor_line = "#0D1321",
-  selection = "#191B26",
+  selection = "#1E2840",
   line_nr = "#5A5C62",
   line_nr_active = "#ff6188",
 
   -- Popups & widgets
   popup_bg = "#03040f",
-  popup_border = "#2a2b3d",
+  popup_border = "#313450",
   popup_highlight = "#ff6188",
   popup_highlight_bg = "#ff6188",
   popup_highlight_fg = "#03040f",
 
   -- Syntax
-  comment = "#6B7080",
-  keyword = "#ff6188",
-  function_name = "#3dc2ec",
-  function_call = "#E76F51",
-  string = "#98c379",
-  number = "#B99470",
-  type = "#6DA4AA",
+  comment = "#6E7490",       -- cooler blue-purple tint vs old warm gray
+  keyword = "#ff6188",       -- BRAND pink
+  function_name = "#3dc2ec", -- BRAND blue
+  function_call = "#FF9E64", -- softer warm orange (was aggressive #E76F51)
+  string = "#98c379",        -- BRAND green
+  number = "#E5C07B",        -- classic amber/gold (was muddy tan #B99470)
+  type = "#56B6C2",          -- vibrant cool teal (was muted gray-teal #6DA4AA)
   constant = "#ECB365",
-  operator = "#7E8299",
-  variable = "#E29578",
-  property = "#858AE3",
+  operator = "#676F89",      -- cooler blue-gray (was warm gray #7E8299)
+  variable = "#EFB999",      -- warm peach-gold, clearly distinct from function_call
+  property = "#9B84E3",      -- more luminous purple (was undersaturated #858AE3)
 
   -- Special literals
   boolean = "#D4956A",
-  null = "#A89EC9",
+  null = "#B3A9D4",          -- slightly more saturated lavender (was #A89EC9)
 
   -- LSP diagnostics
   error = "#FE5D9F",
@@ -101,8 +101,8 @@ local defaults = {
   search_current = "#3d1e5c",
 
   -- Misc
-  bracket_match_bg = "#2B2C28",
-  whitespace = "#252636",
+  bracket_match_bg = "#1F2640", -- cool dark blue (was yellow-green tinted #2B2C28)
+  whitespace = "#23243C",       -- slightly more purple to match bg tone
   cursor_ime = "#ff6188",
   sidebar_bg = "#060914",
 }
